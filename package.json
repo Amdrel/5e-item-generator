@@ -1,0 +1,15 @@
+{
+  "name": "5e-item-generator",
+  "version": "0.0.0",
+  "description": "Generates homebrew items for use in D&D 5th Edition campaigns.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jamie Kuppens",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}
