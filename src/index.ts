@@ -1,1 +1,4 @@
-console.log('Hello, world!');
+import { ItemGraph } from "./data";
+import { generate } from "./graph";
+
+generate(ItemGraph);

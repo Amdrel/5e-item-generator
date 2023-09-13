@@ -7,12 +7,12 @@ export interface Category {
   type: NodeType.Category;
   name: string;
   weight?: number;
-  children?: Node[];
+  children?: GraphNode[];
 }
 
 export function makeCategory(
   name: string,
-  children?: Node[],
+  children?: GraphNode[],
   weight?: number
 ): Category {
   return { type: NodeType.Category, name, children, weight };
@@ -20,7 +20,7 @@ export function makeCategory(
 
 export function makeCategories(
   names: string[],
-  children?: Node[],
+  children?: GraphNode[],
   weight?: number
 ): Category[] {
   return names.map((name) => makeCategory(name, children, weight));
@@ -40,12 +40,12 @@ export function makeAttributes(names: string[], weight?: number): Attribute[] {
   return names.map((name) => makeAttribute(name, weight));
 }
 
-export type Node = Category | Attribute;
+export type GraphNode = Category | Attribute;
 
-export function isCategory(object: Node): object is Category {
+export function isCategory(object: GraphNode): object is Category {
   return object.type === NodeType.Category;
 }
 
-export function isAttribute(object: Node): object is Attribute {
+export function isAttribute(object: GraphNode): object is Attribute {
   return object.type === NodeType.Attribute;
 }
