@@ -7,13 +7,17 @@ interface WeightedItem {
 /**
  * Generate a random item using data from a provided graph.
  */
-export function generate(node: GraphNode): void {
+export function generate(node: GraphNode, attributes?: string[]): string[] {
   if (isAttribute(node)) {
-    console.log(node.name);
+    return [...(attributes ?? []), node.name];
   } else if (isCategory(node) && node.children) {
-    console.log(node.name);
-    generate(weightedRandom(node.children));
+    return generate(weightedRandom(node.children), [
+      ...(attributes ?? []),
+      node.name,
+    ]);
   }
+
+  throw new Error("Got a node with an unhandled type.");
 }
 
 /**

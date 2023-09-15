@@ -6,6 +6,8 @@ import {
   makeCategories,
 } from "./types";
 
+// NOTE: Remove damage increase from armor but keep it for weapons.
+
 const Stat: Category = {
   type: NodeType.Category,
   name: "Stat",
