@@ -1,7 +1,8 @@
 import { ItemGraph } from "./types/data";
 import { generate } from "./generate";
+import { renderItem } from "./types/item";
 
 for (let i = 0; i < 10; i++) {
-  const attributes = generate(ItemGraph);
-  console.log(attributes.join(", "));
+  const item = generate(ItemGraph);
+  console.log(renderItem(item));
 }

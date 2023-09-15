@@ -1,14 +1,18 @@
 import {
-  Category,
+  CategoryNode,
   NodeType,
+  ResistanceNode,
+  SavingThrowNode,
   makeAttribute,
   makeAttributes,
   makeCategories,
+  makeItems,
+  makeProficiencies,
 } from "./nodes";
 
 // NOTE: Remove damage increase from armor but keep it for weapons.
 
-const Stat: Category = {
+const Stat: CategoryNode = {
   type: NodeType.Category,
   name: "Stat",
   children: makeAttributes([
@@ -21,7 +25,7 @@ const Stat: Category = {
   ]),
 };
 
-const Skill: Category = {
+const Skill: CategoryNode = {
   type: NodeType.Category,
   name: "Skill",
   children: makeAttributes([
@@ -46,13 +50,13 @@ const Skill: Category = {
   ]),
 };
 
-const PhysicalDamage: Category = {
+const PhysicalDamage: CategoryNode = {
   type: NodeType.Category,
   name: "PhysicalDamage",
   children: makeAttributes(["Slashing", "Piercing", "Bludgeoning"]),
 };
 
-const MagicalDamage: Category = {
+const MagicalDamage: CategoryNode = {
   type: NodeType.Category,
   name: "MagicalDamage",
   children: makeAttributes([
@@ -69,25 +73,25 @@ const MagicalDamage: Category = {
   ]),
 };
 
-const Damage: Category = {
+const Damage: CategoryNode = {
   type: NodeType.Category,
   name: "Damage",
   children: [PhysicalDamage, MagicalDamage],
 };
 
-const Resistance: Category = {
-  type: NodeType.Category,
+const Resistance: ResistanceNode = {
+  type: NodeType.Resistance,
   name: "Resistance",
   children: [PhysicalDamage, MagicalDamage],
 };
 
-const SavingThrow: Category = {
-  type: NodeType.Category,
+const SavingThrow: SavingThrowNode = {
+  type: NodeType.SavingThrow,
   name: "SavingThrow",
   children: Stat.children,
 };
 
-const ArmorEffect: Category = {
+const ArmorEffect: CategoryNode = {
   type: NodeType.Category,
   name: "ArmorEffect",
   children: [
@@ -100,35 +104,35 @@ const ArmorEffect: Category = {
   ],
 };
 
-const ArmorSlot: Category = {
+const ArmorSlot: CategoryNode = {
   type: NodeType.Category,
   name: "ArmorSlot",
-  children: makeCategories(
+  children: makeItems(
     ["Helmet", "Shoulders", "Chest", "Legs", "Boots"],
     ArmorEffect.children
   ),
 };
 
-const Armor: Category = {
+const Armor: CategoryNode = {
   type: NodeType.Category,
   name: "Armor",
-  children: makeCategories(
+  children: makeProficiencies(
     ["Clothes", "Light", "Medium", "Heavy"],
     ArmorSlot.children
   ),
 };
 
-const WeaponEffect: Category = {
+const WeaponEffect: CategoryNode = {
   type: NodeType.Category,
   name: "WeaponEffect",
-  children: [Stat, Damage, makeAttribute("Initiative")],
+  children: [Damage, makeAttribute("Initiative")],
 };
 
-const SimpleMelee: Category = {
+const SimpleMelee: CategoryNode = {
   type: NodeType.Category,
   name: "SimpleMelee",
   weight: 2,
-  children: makeCategories(
+  children: makeItems(
     [
       "Club",
       "Dagger",
@@ -145,11 +149,11 @@ const SimpleMelee: Category = {
   ),
 };
 
-const MartialMelee: Category = {
+const MartialMelee: CategoryNode = {
   type: NodeType.Category,
   name: "MartialMelee",
   weight: 3,
-  children: makeCategories(
+  children: makeItems(
     [
       "Battleaxe",
       "Flail",
@@ -175,33 +179,33 @@ const MartialMelee: Category = {
   ),
 };
 
-const SimpleRanged: Category = {
+const SimpleRanged: CategoryNode = {
   type: NodeType.Category,
   name: "SimpleRanged",
   weight: 1,
-  children: makeCategories(
+  children: makeItems(
     ["Light Crossbow", "Darts", "Shortbow", "Sling"],
     WeaponEffect.children
   ),
 };
 
-const MartialRanged: Category = {
+const MartialRanged: CategoryNode = {
   type: NodeType.Category,
   name: "MartialRanged",
   weight: 1,
-  children: makeCategories(
+  children: makeItems(
     ["Blowgun", "Hand Crossbow", "Heavy Crossbow", "Longbow", "Net"],
     WeaponEffect.children
   ),
 };
 
-const Weapon: Category = {
+const Weapon: CategoryNode = {
   type: NodeType.Category,
   name: "Weapon",
   children: [SimpleMelee, MartialMelee, SimpleRanged, MartialRanged],
 };
 
-const JewelryEffect: Category = {
+const JewelryEffect: CategoryNode = {
   type: NodeType.Category,
   name: "JewelryEffect",
   children: [
@@ -215,26 +219,17 @@ const JewelryEffect: Category = {
   ],
 };
 
-const Jewelry: Category = {
+const Jewelry: CategoryNode = {
   type: NodeType.Category,
   name: "Jewelry",
-  children: makeCategories(
+  children: makeItems(
     ["Necklace", "Ring", "Bracelet", "Earring"],
     JewelryEffect.children
   ),
 };
 
-export const ItemGraph: Category = {
+export const ItemGraph: CategoryNode = {
   type: NodeType.Category,
   name: "Equipment",
   children: [Armor, Weapon, Jewelry],
 };
-
-// {
-//   type: NodeType.Category,
-//   name: "Weapon",
-// },
-// {
-//   type: NodeType.Category,
-//   name: "Trinket",
-// },
