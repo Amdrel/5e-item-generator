@@ -1,4 +1,4 @@
-import { GraphNode, isAttribute, isCategory } from "./types";
+import { GraphNode, isAttribute, isCategory } from "./types/nodes";
 
 interface WeightedItem {
   weight?: number;

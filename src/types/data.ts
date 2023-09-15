@@ -4,7 +4,7 @@ import {
   makeAttribute,
   makeAttributes,
   makeCategories,
-} from "./types";
+} from "./nodes";
 
 // NOTE: Remove damage increase from armor but keep it for weapons.
 
