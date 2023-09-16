@@ -5,10 +5,9 @@ import {
   SavingThrowNode,
   makeAttribute,
   makeAttributes,
-  makeCategories,
   makeItems,
   makeProficiencies,
-} from "./nodes";
+} from "../model/nodes";
 
 // NOTE: Remove damage increase from armor but keep it for weapons.
 

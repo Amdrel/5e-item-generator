@@ -1,4 +1,5 @@
-import { Item } from "./types/item";
+import { Item } from "./model/item";
+import { ItemAttributeVariant } from "./model/item-attribute-variant";
 import {
   GraphNode,
   isAttribute,
@@ -7,20 +8,14 @@ import {
   isProficiency,
   isResistance,
   isSavingThrow,
-} from "./types/nodes";
+} from "./model/nodes";
 
 interface WeightedItem {
   weight?: number;
 }
 
-enum Variant {
-  Unspecified = "",
-  Resistance = "Resistance",
-  SavingThrow = "Saving Throws",
-}
-
 interface Context {
-  variant?: Variant;
+  variant?: ItemAttributeVariant;
 }
 
 /**
@@ -51,12 +46,12 @@ export function generate(
   } else if (isResistance(node) && node.children) {
     return generate(weightedRandom(node.children), item, {
       ...context,
-      variant: Variant.Resistance,
+      variant: ItemAttributeVariant.Resistance,
     });
   } else if (isSavingThrow(node) && node.children) {
     return generate(weightedRandom(node.children), item, {
       ...context,
-      variant: Variant.SavingThrow,
+      variant: ItemAttributeVariant.SavingThrow,
     });
   }
 
