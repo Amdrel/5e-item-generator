@@ -7,14 +7,14 @@ function renderItem(item: Item): string {
 
   output += item.proficiency ? `${item.proficiency} ${item.name}` : item.name;
 
+  if (item.damage) {
+    output += ` (${item.damage} ${item.damageType})`;
+  }
+
   item.attributes.forEach((attribute) => {
     const name = attribute.damageType
       ? `${attribute.damageType} Damage`
       : attribute.name;
-
-    if (item.damage) {
-      output += ` (${item.damage} ${item.damageType})`;
-    }
 
     output += attribute.variant
       ? ` (+${attribute.value} ${name} ${attribute.variant})`
