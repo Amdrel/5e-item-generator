@@ -14,8 +14,6 @@ import {
   makeProficiencies,
 } from "../model/nodes";
 
-// NOTE: Remove damage increase from armor but keep it for weapons.
-
 const Stat: CategoryNode = {
   type: NodeType.Category,
   name: "Stat",
@@ -162,7 +160,7 @@ const MartialMelee: CategoryNode = {
     makeItem("Flail", WeaponEffect.children, 1, "1d8", DamageType.Bludgeoning),
     makeItem("Glaive", WeaponEffect.children, 1, "1d10", DamageType.Slashing),
     makeItem("Greataxe", WeaponEffect.children, 1, "1d12", DamageType.Slashing),
-    makeItem("Greatsword", WeaponEffect.children, 1, "1d6", DamageType.Slashing),
+    makeItem("Greatsword", WeaponEffect.children, 1, "2d6", DamageType.Slashing),
     makeItem("Halbard", WeaponEffect.children, 1, "1d10", DamageType.Slashing),
     makeItem("Lance", WeaponEffect.children, 1, "1d12", DamageType.Piercing),
     makeItem("Longsword", WeaponEffect.children, 1, "1d8", DamageType.Slashing),
