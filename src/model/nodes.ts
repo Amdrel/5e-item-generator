@@ -36,22 +36,30 @@ export function makeCategories(
 
 export interface ItemNode extends Omit<CategoryNode, "type"> {
   type: NodeType.Item;
+  damage?: string | number;
+  damageType?: DamageType;
 }
 
 export function makeItem(
   name: string,
   children?: GraphNode[],
-  weight?: number
+  weight?: number,
+  damage?: string | number,
+  damageType?: DamageType
 ): ItemNode {
-  return { type: NodeType.Item, name, children, weight };
+  return { type: NodeType.Item, name, children, weight, damage, damageType };
 }
 
 export function makeItems(
   names: string[],
   children?: GraphNode[],
-  weight?: number
+  weight?: number,
+  damage?: string | number,
+  damageType?: DamageType
 ): ItemNode[] {
-  return names.map((name) => makeItem(name, children, weight));
+  return names.map((name) =>
+    makeItem(name, children, weight, damage, damageType)
+  );
 }
 
 export interface ProficiencyNode extends Omit<CategoryNode, "type" | "name"> {

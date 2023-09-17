@@ -12,6 +12,10 @@ function renderItem(item: Item): string {
       ? `${attribute.damageType} Damage`
       : attribute.name;
 
+    if (item.damage) {
+      output += ` (${item.damage} ${item.damageType})`;
+    }
+
     output += attribute.variant
       ? ` (+${attribute.value} ${name} ${attribute.variant})`
       : ` (+${attribute.value} ${name})`;

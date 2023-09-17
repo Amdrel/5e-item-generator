@@ -1,4 +1,5 @@
 export enum DamageType {
+  SamePhysical = "SamePhysical",
   Slashing = "Slashing",
   Piercing = "Piercing",
   Bludgeoning = "Bludgeoning",
