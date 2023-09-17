@@ -1,3 +1,5 @@
+import { DamageType } from "../model/item/damage-type";
+import { Proficiency } from "../model/item/proficiency";
 import {
   CategoryNode,
   NodeType,
@@ -5,6 +7,7 @@ import {
   SavingThrowNode,
   makeAttribute,
   makeAttributes,
+  makeDamageTypes,
   makeItems,
   makeProficiencies,
 } from "../model/nodes";
@@ -52,23 +55,27 @@ const Skill: CategoryNode = {
 const PhysicalDamage: CategoryNode = {
   type: NodeType.Category,
   name: "PhysicalDamage",
-  children: makeAttributes(["Slashing", "Piercing", "Bludgeoning"]),
+  children: makeDamageTypes([
+    DamageType.Slashing,
+    DamageType.Piercing,
+    DamageType.Bludgeoning,
+  ]),
 };
 
 const MagicalDamage: CategoryNode = {
   type: NodeType.Category,
   name: "MagicalDamage",
-  children: makeAttributes([
-    "Acid",
-    "Cold",
-    "Fire",
-    "Force",
-    "Lightning",
-    "Necrotic",
-    "Poison",
-    "Psychic",
-    "Radiant",
-    "Thunder",
+  children: makeDamageTypes([
+    DamageType.Acid,
+    DamageType.Cold,
+    DamageType.Fire,
+    DamageType.Force,
+    DamageType.Lightning,
+    DamageType.Necrotic,
+    DamageType.Poison,
+    DamageType.Psychic,
+    DamageType.Radiant,
+    DamageType.Thunder,
   ]),
 };
 
@@ -116,7 +123,12 @@ const Armor: CategoryNode = {
   type: NodeType.Category,
   name: "Armor",
   children: makeProficiencies(
-    ["Clothes", "Light", "Medium", "Heavy"],
+    [
+      Proficiency.Clothes,
+      Proficiency.Light,
+      Proficiency.Medium,
+      Proficiency.Heavy,
+    ],
     ArmorSlot.children
   ),
 };

@@ -1,9 +1,10 @@
 import { Item } from "./model/item";
-import { ItemAttributeVariant } from "./model/item-attribute-variant";
+import { Variant } from "./model/item/variant";
 import {
   GraphNode,
   isAttribute,
   isCategory,
+  isDamageType,
   isItem,
   isProficiency,
   isResistance,
@@ -15,7 +16,7 @@ interface WeightedItem {
 }
 
 interface Context {
-  variant?: ItemAttributeVariant;
+  variant?: Variant;
 }
 
 /**
@@ -35,6 +36,14 @@ export function generate(
       variant: context?.variant,
     });
     return item;
+  } else if (isDamageType(node)) {
+    item.attributes.push({
+      name: node.name,
+      value: 1,
+      variant: context?.variant,
+      damageType: node.name,
+    });
+    return item;
   } else if (isCategory(node) && node.children) {
     return generate(weightedRandom(node.children), item, context);
   } else if (isItem(node) && node.children) {
@@ -46,16 +55,16 @@ export function generate(
   } else if (isResistance(node) && node.children) {
     return generate(weightedRandom(node.children), item, {
       ...context,
-      variant: ItemAttributeVariant.Resistance,
+      variant: Variant.Resistance,
     });
   } else if (isSavingThrow(node) && node.children) {
     return generate(weightedRandom(node.children), item, {
       ...context,
-      variant: ItemAttributeVariant.SavingThrow,
+      variant: Variant.SavingThrow,
     });
   }
 
-  throw new Error("Got a node with an unhandled type.");
+  throw new Error(`Got a node with an unhandled type "${node.type}"`);
 }
 
 /**

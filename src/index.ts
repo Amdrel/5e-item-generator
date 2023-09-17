@@ -8,9 +8,13 @@ function renderItem(item: Item): string {
   output += item.proficiency ? `${item.proficiency} ${item.name}` : item.name;
 
   item.attributes.forEach((attribute) => {
+    const name = attribute.damageType
+      ? `${attribute.damageType} Damage`
+      : attribute.name;
+
     output += attribute.variant
-      ? ` (+${attribute.value} ${attribute.name} ${attribute.variant})`
-      : ` (+${attribute.value} ${attribute.name})`;
+      ? ` (+${attribute.value} ${name} ${attribute.variant})`
+      : ` (+${attribute.value} ${name})`;
   });
 
   return output;

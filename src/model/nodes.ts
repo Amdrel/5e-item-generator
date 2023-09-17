@@ -1,10 +1,14 @@
+import { DamageType } from "./item/damage-type";
+import { Proficiency } from "./item/proficiency";
+
 export enum NodeType {
-  Category,
-  Item,
-  Proficiency,
-  Attribute,
-  Resistance,
-  SavingThrow,
+  Category = "Category",
+  Item = "Item",
+  Proficiency = "Proficiency",
+  Attribute = "Attribute",
+  Resistance = "Resistance",
+  SavingThrow = "SavingThrow",
+  DamageType = "DamageType",
 }
 
 export interface CategoryNode {
@@ -50,12 +54,13 @@ export function makeItems(
   return names.map((name) => makeItem(name, children, weight));
 }
 
-export interface ProficiencyNode extends Omit<CategoryNode, "type"> {
+export interface ProficiencyNode extends Omit<CategoryNode, "type" | "name"> {
   type: NodeType.Proficiency;
+  name: Proficiency;
 }
 
 export function makeProficiency(
-  name: string,
+  name: Proficiency,
   children?: GraphNode[],
   weight?: number
 ): ProficiencyNode {
@@ -63,11 +68,30 @@ export function makeProficiency(
 }
 
 export function makeProficiencies(
-  names: string[],
+  names: Proficiency[],
   children?: GraphNode[],
   weight?: number
 ): ProficiencyNode[] {
   return names.map((name) => makeProficiency(name, children, weight));
+}
+
+export interface DamageTypeNode extends Omit<AttributeNode, "type" | "name"> {
+  type: NodeType.DamageType;
+  name: DamageType;
+}
+
+export function makeDamageType(
+  name: DamageType,
+  weight?: number
+): DamageTypeNode {
+  return { type: NodeType.DamageType, name, weight };
+}
+
+export function makeDamageTypes(
+  names: DamageType[],
+  weight?: number
+): DamageTypeNode[] {
+  return names.map((name) => makeDamageType(name, weight));
 }
 
 export interface AttributeNode {
@@ -133,7 +157,8 @@ export type GraphNode =
   | ProficiencyNode
   | AttributeNode
   | ResistanceNode
-  | SavingThrowNode;
+  | SavingThrowNode
+  | DamageTypeNode;
 
 export function isCategory(object: GraphNode): object is CategoryNode {
   return object.type === NodeType.Category;
@@ -157,4 +182,8 @@ export function isResistance(object: GraphNode): object is ResistanceNode {
 
 export function isSavingThrow(object: GraphNode): object is SavingThrowNode {
   return object.type === NodeType.SavingThrow;
+}
+
+export function isDamageType(object: GraphNode): object is DamageTypeNode {
+  return object.type === NodeType.DamageType;
 }
