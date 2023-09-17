@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "type": "module",
   "description": "Generates homebrew items for use in D&D 5th Edition campaigns.",
-  "main": "dist/index.js",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -14,6 +13,10 @@
   "author": "Jamie Kuppens",
   "license": "ISC",
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.9",
+    "@mui/material": "^5.14.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
