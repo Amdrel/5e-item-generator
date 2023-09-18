@@ -7,18 +7,18 @@ type RouteDefinitions = Record<
 >;
 
 const DynamicRouteDefinitions: RouteDefinitions = import.meta.glob(
-  "/src/pages/**/[a-z[]*.tsx",
+  "/src/app/pages/**/[a-z[]*.tsx",
   { eager: true }
 );
 
 const PreservedRouteDefinitions: RouteDefinitions = import.meta.glob(
-  "/src/pages/(_app|404).tsx",
+  "/src/app/pages/(_app|404).tsx",
   { eager: true }
 );
 
 const dynamicRoutes = Object.keys(DynamicRouteDefinitions).map((route) => {
   const path = route
-    .replace(/\/src\/pages|index|\.tsx$/g, "")
+    .replace(/\/src\/app\/pages|index|\.tsx$/g, "")
     .replace(/\[\.{3}.+\]/, "*")
     .replace(/\[(.+)\]/, ":$1");
 
@@ -30,7 +30,7 @@ const dynamicRoutes = Object.keys(DynamicRouteDefinitions).map((route) => {
 
 const preservedRoutes = Object.keys(PreservedRouteDefinitions).reduce(
   (preserved, file) => {
-    const key = file.replace(/\/src\/pages\/|\.tsx$/g, "");
+    const key = file.replace(/\/src\/app\/pages\/|\.tsx$/g, "");
 
     return {
       ...preserved,

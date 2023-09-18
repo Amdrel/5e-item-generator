@@ -2,7 +2,7 @@
   "printWidth": 80,
   "overrides": [
     {
-      "files": "src/generator/data/**/*.ts",
+      "files": "src/lib/generator/data/**/*.ts",
       "options": {
         "printWidth": 100
       }
