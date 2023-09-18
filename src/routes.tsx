@@ -53,13 +53,9 @@ function Routes() {
       <App>
         <ReactRouterRoutes>
           {dynamicRoutes.map(({ path, component: Component = Fragment }) => (
-            <Route
-              key={path}
-              path={path}
-              element={Component ? <Component /> : null}
-            />
+            <Route key={path} path={path} element={<Component />} />
           ))}
-          <Route path="*" element={NotFound ? <NotFound /> : null} />
+          <Route path="*" element={<NotFound />} />
         </ReactRouterRoutes>
       </App>
     </>
