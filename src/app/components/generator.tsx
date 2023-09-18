@@ -4,13 +4,9 @@ import { Box, Button } from "@mui/material";
 import { useState } from "react";
 import "./generator.css";
 
-function Field({
-  name,
-  className,
-  children,
-}: React.PropsWithChildren<{ name: string; className?: string }>) {
+function Field({ name, children }: React.PropsWithChildren<{ name: string }>) {
   return (
-    <p className={className}>
+    <p className="field">
       <strong>{name}:</strong> {children}
     </p>
   );
@@ -22,22 +18,18 @@ function Generator() {
 
   return (
     <Box>
-      <Field className="field" name="Name">
-        {item.name}
-      </Field>
+      <Field name="Name">{item.name}</Field>
       {item.proficiency ? (
-        <Field className="field" name="Armor Proficiency">
-          {item.proficiency}
-        </Field>
+        <Field name="Armor Proficiency">{item.proficiency}</Field>
       ) : null}
       {item.damageType && item.damage != null ? (
-        <Field className="field" name="Damage">
+        <Field name="Damage">
           {item.damage} {item.damageType}
         </Field>
       ) : null}
 
       {item.attributes ? (
-        <Field className="field" name="Modifiers">
+        <Field name="Modifiers">
           {item.attributes.map((attribute) => {
             if (attribute.damageType) {
               if (attribute.name === DamageType.SamePhysical) {
