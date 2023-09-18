@@ -44,9 +44,6 @@ function Routes() {
   const App = preservedRoutes?.["_app"].default || Fragment;
   const NotFound = preservedRoutes?.["404"].default || Fragment;
 
-  console.log("Dynamic Routes:", dynamicRoutes);
-  console.log("Preserved Routes:", preservedRoutes);
-
   return (
     <>
       {/* @ts-ignore */}
