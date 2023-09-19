@@ -48,7 +48,7 @@ const Skill: CategoryNode = {
     "Deception",
     "Intimidation",
     "Performance",
-    "Persuation",
+    "Persuasion",
   ]),
 };
 

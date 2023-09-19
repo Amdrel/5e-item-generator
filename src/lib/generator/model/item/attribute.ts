@@ -5,5 +5,5 @@ export interface Attribute {
   name: string;
   variant?: Variant;
   damageType?: DamageType;
-  value?: number;
+  value?: string | number;
 }

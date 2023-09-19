@@ -43,11 +43,27 @@ export function generate(
     const damageType =
       node.name === DamageType.SamePhysical ? item.damageType : node.name;
 
-    item.attributes.push({
-      name: node.name,
+    let damage: number | string;
+    if (damageType === DamageType.SamePhysical) {
       // If we get SamePhysical here then we've got a weapon that does no damage
       // like a net or other utility item.
-      value: damageType === DamageType.SamePhysical ? 0 : 1,
+      damage = 0;
+    } else if (
+      damageType &&
+      ![
+        DamageType.Piercing,
+        DamageType.Slashing,
+        DamageType.Bludgeoning,
+      ].includes(damageType)
+    ) {
+      damage = "1d4";
+    } else {
+      damage = 1;
+    }
+
+    item.attributes.push({
+      name: node.name,
+      value: damage,
       variant: context?.variant,
       damageType,
     });
